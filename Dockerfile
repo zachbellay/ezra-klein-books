@@ -27,9 +27,11 @@ RUN apt-get update && \
 WORKDIR /app
 
 # Python Dependencies
-COPY --chown=python:python ./requirements.txt /app/
+COPY --chown=python:python ./poetry.lock ./pyproject.toml /app/
 RUN pip install --upgrade pip \
-    && pip install -r requirements.txt --no-cache-dir --compile
+    && pip install poetry \
+    && poetry config virtualenvs.create false \
+    && poetry install --no-dev --no-interaction --no-ansi
 
 # Clean up
 RUN apt-get -y purge gcc libc-dev python3-dev
