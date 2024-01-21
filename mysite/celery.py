@@ -2,9 +2,9 @@ import os
 
 from celery import Celery
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "railway_django_stack.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
 
-app = Celery("railway_django_stack")
+app = Celery("mysite")
 
 app.config_from_object("django.conf:settings", namespace="CELERY")
 

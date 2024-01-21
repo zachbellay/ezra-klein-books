@@ -1,5 +1,5 @@
 """
-URL configuration for railway_django_stack project.
+URL configuration for mysite project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -14,10 +14,9 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import mysite.example_views as example_views
 from django.contrib import admin
 from django.urls import path
-
-import railway_django_stack.example_views as example_views
 
 urlpatterns = [
     path("", example_views.index, name="index"),

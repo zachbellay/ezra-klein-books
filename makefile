@@ -18,7 +18,7 @@ lint:
 	isort . --profile black
 
 celery:
-	celery -A railway_django_stack worker --beat -l INFO
+	celery -A mysite worker --beat -l INFO
 
 redis:
 	docker run -p 6379:6379 redis
