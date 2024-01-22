@@ -12,12 +12,6 @@ app.config_from_object("django.conf:settings", namespace="CELERY")
 app.autodiscover_tasks()
 
 
-@app.task(bind=True, ignore_result=True)
+@app.task(bind=True)
 def example_task(self):
-    import time
-
     print("You've triggered the example task!")
-    for i in range(10):
-        print(i)
-        time.sleep(1)
-    

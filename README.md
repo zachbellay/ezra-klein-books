@@ -97,7 +97,7 @@ This is a barebones Django-project with the following additions/updates:
 
 ### Celery Worker
 
-`DJANGO_SETTINGS_MODULE=mysite.settings.local watchmedo auto-restart -d . -p '*.py' --recursive -- celery -A mysite worker -l INFO`
+`DJANGO_SETTINGS_MODULE=mysite.settings.local watchmedo auto-restart -d . -p '*.py' --recursive -- celery -A mysite worker --beat -Q celery --loglevel=info --concurrency=4 --scheduler django_celery_beat.schedulers:DatabaseScheduler`
 
 ### Django Server
 
