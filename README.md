@@ -85,3 +85,20 @@ This is a barebones Django-project with the following additions/updates:
 - Uses [`python-decouple`](https://github.com/HBNetwork/python-decouple) to manage settings via environment varialbes
 - Uses [`whitenoise`](https://github.com/evansd/whitenoise) to make serving static assets easy
 - Installs and runs with [`gunicorn`](https://github.com/benoitc/gunicorn)
+
+
+
+
+## Local Dev Terminal Commands:
+
+### Redis
+
+`docker compose up`
+
+### Celery Worker
+
+`DJANGO_SETTINGS_MODULE=mysite.settings.local watchmedo auto-restart -d . -p '*.py' --recursive -- celery -A mysite worker -l INFO`
+
+### Django Server
+
+`DJANGO_SETTINGS_MODULE=mysite.settings.local python manage.py runserver`

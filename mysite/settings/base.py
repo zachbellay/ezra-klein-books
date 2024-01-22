@@ -78,16 +78,16 @@ WSGI_APPLICATION = "mysite.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "HOST": config("PGHOST", default="db"),
-        "USER": config("PGUSER", default="postgres"),
-        "NAME": config("PGDATABASE", default="postgres"),
-        "PASSWORD": config("PGPASSWORD", default="postgres"),
-        "PORT": config("PGPORT", default=5432),
+        "HOST": config("PGHOST"),
+        "USER": config("PGUSER"),
+        "NAME": config("PGDATABASE"),
+        "PASSWORD": config("PGPASSWORD"),
+        "PORT": config("PGPORT"),
         "CONN_MAX_AGE": 60,
     }
 }
 
-REDIS_URL = f"redis://{config('REDISUSER', default='default')}:{config('REDISPASSWORD', default='')}@{config('REDISHOST', default='redis')}:{config('REDISPORT', default=6379)}"
+REDIS_URL = config("REDIS_URL")
 
 # CELERY CONFIG
 CELERY_BROKER_URL = REDIS_URL
