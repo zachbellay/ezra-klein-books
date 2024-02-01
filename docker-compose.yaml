@@ -1,10 +1,81 @@
 version: "3"
 services:
+
+  django:
+    restart: always
+    build:
+      context: .
+      dockerfile: ./docker/django/Dockerfile
+    environment:
+      - DJANGO_POSTGRES_DB=${DJANGO_POSTGRES_DB}
+      - DJANGO_POSTGRES_USER=${DJANGO_POSTGRES_USER}
+      - DJANGO_DATABASE_PASSWORD=${DJANGO_DATABASE_PASSWORD}
+      - DJANGO_DATABASE_HOST=${DJANGO_DATABASE_HOST}
+      - DJANGO_DATABASE_PORT=${DJANGO_DATABASE_PORT}
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+      - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
+      - DJANGO_DEBUG=${DJANGO_DEBUG}
+      - REDIS_URL=${REDIS_URL}
+    
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - redis
+      - postgres
+    # ports:
+      # - "8000:8000"
+  
+  celery-worker:
+    restart: always
+    build:
+      context: .
+      dockerfile: ./docker/django/Dockerfile
+    entrypoint: ./deployment/worker-entrypoint.sh
+    environment:
+      - DJANGO_POSTGRES_DB=${DJANGO_POSTGRES_DB}
+      - DJANGO_POSTGRES_USER=${DJANGO_POSTGRES_USER}
+      - DJANGO_DATABASE_PASSWORD=${DJANGO_DATABASE_PASSWORD}
+      - DJANGO_DATABASE_HOST=${DJANGO_DATABASE_HOST}
+      - DJANGO_DATABASE_PORT=${DJANGO_DATABASE_PORT}
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+      - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
+      - DJANGO_DEBUG=${DJANGO_DEBUG}
+      - REDIS_URL=${REDIS_URL}
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - redis
+      - postgres
+
   redis:
     restart: unless-stopped
     image: redis:latest
-    ports:
-      - "6379:6379"
+    networks:
+      - redis
+    expose:
+      - "6379"
+
+  postgres:
+    build:
+      context: ./docker/postgres
+    environment:
+      POSTGRES_USER: ${DJANGO_POSTGRES_USER}
+      POSTGRES_PASSWORD: ${DJANGO_DATABASE_PASSWORD}
+      POSTGRES_DB: ${DJANGO_POSTGRES_DB}
+      PGDATA: /data/postgres
+    volumes:
+      - ./.data/postgres:/data/postgres
+    networks:
+      - postgres
+    restart: always
+
+networks:
+  postgres:
+    driver: bridge
+  redis:
+    driver: bridge
 
 volumes:
-  postgres_data: {}
+  postgres:

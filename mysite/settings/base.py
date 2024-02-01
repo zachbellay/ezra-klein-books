@@ -78,11 +78,11 @@ WSGI_APPLICATION = "mysite.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "HOST": config("PGHOST"),
-        "USER": config("PGUSER"),
-        "NAME": config("PGDATABASE"),
-        "PASSWORD": config("PGPASSWORD"),
-        "PORT": config("PGPORT"),
+        "HOST": config("DJANGO_DATABASE_HOST"),
+        "USER": config("DJANGO_POSTGRES_USER"),
+        "NAME": config("DJANGO_POSTGRES_DB"),
+        "PASSWORD": config("DJANGO_DATABASE_PASSWORD"),
+        "PORT": config("DJANGO_DATABASE_PORT"),
         "CONN_MAX_AGE": 60,
     }
 }
