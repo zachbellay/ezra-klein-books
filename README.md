@@ -82,7 +82,7 @@ This is a barebones Django-project with the following additions/updates:
 - Configures Celery, and installs the following add-on apps:
   - [`django-celery-beat`](https://github.com/celery/django-celery-beat) for periodic task management
   - [`django-celery-results`](https://github.com/celery/django-celery-results) for viewing results of Celery tasks in Django Admin
-- Uses [`python-decouple`](https://github.com/HBNetwork/python-decouple) to manage settings via environment varialbes
+- Uses [`python-decouple`](https://github.com/HBNetwork/python-decouple) to manage settings via environment variables
 - Uses [`whitenoise`](https://github.com/evansd/whitenoise) to make serving static assets easy
 - Installs and runs with [`gunicorn`](https://github.com/benoitc/gunicorn)
 
@@ -93,12 +93,12 @@ This is a barebones Django-project with the following additions/updates:
 
 ### Redis
 
-`docker compose up`
+redis-server
 
 ### Celery Worker
 
-`DJANGO_SETTINGS_MODULE=mysite.settings.local watchmedo auto-restart -d . -p '*.py' --recursive -- celery -A mysite worker --beat -Q celery --loglevel=info --concurrency=4 --scheduler django_celery_beat.schedulers:DatabaseScheduler`
+DJANGO_SETTINGS_MODULE=mysite.settings.local watchmedo auto-restart -d . -p '*.py' --recursive -- celery -A mysite worker --beat -Q celery --loglevel=info --concurrency=1 --scheduler django_celery_beat.schedulers:DatabaseScheduler
 
 ### Django Server
 
-`DJANGO_SETTINGS_MODULE=mysite.settings.local python manage.py runserver`
+DJANGO_SETTINGS_MODULE=mysite.settings.local python manage.py runserver
