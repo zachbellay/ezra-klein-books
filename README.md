@@ -99,6 +99,10 @@ redis-server
 
 DJANGO_SETTINGS_MODULE=mysite.settings.local watchmedo auto-restart -d . -p '*.py' --recursive -- celery -A mysite worker --beat -Q celery --loglevel=info --concurrency=1 --scheduler django_celery_beat.schedulers:DatabaseScheduler
 
+
 ### Django Server
 
 DJANGO_SETTINGS_MODULE=mysite.settings.local python manage.py runserver
+
+
+

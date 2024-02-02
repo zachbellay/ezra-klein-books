@@ -34,6 +34,5 @@ class PodcastEpisode(BaseModel):
     whisper_transcription_object = models.JSONField(default=None, null=True, blank=True)
     duration = models.PositiveIntegerField(default=None, null=True, blank=True)
 
-
     def __str__(self):
         return f"{self.date} - {self.title}"

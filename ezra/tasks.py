@@ -84,7 +84,6 @@ def read_rss_feed():
         )
         print(episode)
 
-
         r = requests.get(episode.resolved_audio_url)
         audio_data = r.content
 
@@ -92,9 +91,6 @@ def read_rss_feed():
         f.write(audio_data)
 
         duration = int(mutagen.File(f.name).info.length)
-
-        
-        
 
         break
 

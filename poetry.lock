@@ -410,6 +410,20 @@ celery = ">=5.2.7,<6.0"
 Django = ">=3.2.18"
 
 [[package]]
+name = "django-extensions"
+version = "3.2.3"
+description = "Extensions for Django"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "django-extensions-3.2.3.tar.gz", hash = "sha256:44d27919d04e23b3f40231c4ab7af4e61ce832ef46d610cc650d53e68328410a"},
+    {file = "django_extensions-3.2.3-py3-none-any.whl", hash = "sha256:9600b7562f79a92cbf1fde6403c04fee314608fefbb595502e34383ae8203401"},
+]
+
+[package.dependencies]
+Django = ">=3.2"
+
+[[package]]
 name = "django-shortuuidfield"
 version = "0.1.3"
 description = "Short UUIDField for Django.  Good for use in urls & file names.  (Base 57, 22 characters)"
@@ -1229,4 +1243,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "37fd180e18facf71c95fd0f7801c0ca655beb69a5724bc099da0bf3c73d43dbd"
+content-hash = "631fe40290361588e365b3fda5b071543a85ba85d1594ee5904386cef4b03015"
