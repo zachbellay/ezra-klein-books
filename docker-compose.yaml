@@ -23,7 +23,7 @@ services:
     networks:
       - redis
       - postgres
-    # ports:
+      #ports:
       # - "8000:8000"
   
   celery-worker:
