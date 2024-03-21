@@ -1,3 +1,6 @@
+.data/
+audio_files/
+
 # redis data
 *.rdb
 

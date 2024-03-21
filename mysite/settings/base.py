@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("DJANGO_SECRET_KEY", default="insecure-key-fill-with-your-own")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DEBUG", default=False, cast=bool)
+DEBUG = config("DJANGO_DEBUG", default=False, cast=bool)
 
 ALLOWED_HOSTS = ["*"]
 
@@ -150,3 +150,23 @@ STATIC_ROOT = os.path.join(BASE_DIR, "../staticfiles")
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# STORAGES = {
+#     "default" : {
+#         "ENGINE": "storages.backends.s3boto3.S3Boto3Storage",
+#         "ACCESS_KEY": config("AWS_ACCESS_KEY_ID"),
+#         "SECRET_KEY": config("AWS_SECRET_ACCESS_KEY"),
+#         "BUCKET_NAME": config("AWS_STORAGE_BUCKET_NAME"),
+#         "REGION_NAME": config("AWS_S3_REGION_NAME"),
+
+#     }
+# }
+
+# Media files (user uploaded files)
+# https://docs.djangoproject.com/en/4.2/howto/static-files/
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Django Storages configuration for local filesystem
+DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'

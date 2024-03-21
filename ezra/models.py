@@ -1,4 +1,5 @@
 from django.db import models
+from pgvector.django import VectorField
 from shortuuidfield import ShortUUIDField
 
 from .enums import WhisperModelSize
@@ -22,6 +23,7 @@ class PodcastEpisode(BaseModel):
     slug = models.SlugField(max_length=250, null=True, blank=True)
 
     # transcription & audio information
+    audio_file = models.FileField(upload_to="audio_files", null=True, blank=True)
     audio_url = models.CharField(max_length=2048, null=False, blank=False)
     resolved_audio_url = models.CharField(max_length=2048, null=False, blank=False)
     transcription = models.JSONField(default=None, null=True, blank=True)
@@ -34,5 +36,10 @@ class PodcastEpisode(BaseModel):
     whisper_transcription_object = models.JSONField(default=None, null=True, blank=True)
     duration = models.PositiveIntegerField(default=None, null=True, blank=True)
 
+
     def __str__(self):
         return f"{self.date} - {self.title}"
+
+class PodcastEpisodeEmbedding(BaseModel):
+    podcast_episode = models.ForeignKey(PodcastEpisode, on_delete=models.CASCADE)
+    embedding = VectorField(dimensions=1024)

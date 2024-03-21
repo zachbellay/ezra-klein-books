@@ -7,6 +7,7 @@ import feedparser
 import mutagen
 import requests
 from celery import shared_task
+from django.core.files.base import ContentFile
 
 from ezra.models import PodcastEpisode
 
@@ -85,12 +86,13 @@ def read_rss_feed():
         print(episode)
 
         r = requests.get(episode.resolved_audio_url)
-        audio_data = r.content
-
-        f = tempfile.NamedTemporaryFile()
-        f.write(audio_data)
-
-        duration = int(mutagen.File(f.name).info.length)
+        if r.status_code == 200:
+            # Create a Django ContentFile from the response content
+            audio_content_file = ContentFile(r.content)
+            file_name = f"{episode.date.strftime('%Y-%m-%d')}-{episode.slug}.mp3"
+            episode.audio_file.save(file_name, audio_content_file, save=True)
+        else:
+            print(f"Failed to download audio file for episode {episode.title}")
 
         break
 

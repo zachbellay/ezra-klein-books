@@ -31,6 +31,8 @@ services:
     build:
       context: .
       dockerfile: ./docker/django/Dockerfile
+      args:
+        - INSTALL_WORKER=true
     entrypoint: ./deployment/worker-entrypoint.sh
     environment:
       - DJANGO_POSTGRES_DB=${DJANGO_POSTGRES_DB}

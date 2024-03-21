@@ -1,4 +1,5 @@
 ARG PYTHON_BUILD_VERSION=3.11
+ARG INSTALL_WORKER=false
 
 FROM python:$PYTHON_BUILD_VERSION-slim AS BASE
 WORKDIR /app
@@ -31,7 +32,7 @@ COPY --chown=python:python ./poetry.lock ./pyproject.toml /app/
 RUN pip install --upgrade pip \
     && pip install poetry \
     && poetry config virtualenvs.create false \
-    && poetry install --no-dev --no-interaction --no-ansi
+    && if [ "$INSTALL_WORKER" = "true" ] ; then poetry install --no-dev --no-interaction --no-ansi --with worker ; else poetry install --no-dev --no-interaction --no-ansi ; fi
 
 # Clean up
 RUN apt-get -y purge gcc libc-dev python3-dev
