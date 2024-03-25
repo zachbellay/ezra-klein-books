@@ -1,4 +1,4 @@
-version: "3"
+version: "3.8"
 services:
 
   django:
@@ -23,8 +23,10 @@ services:
     networks:
       - redis
       - postgres
-      #ports:
-      # - "8000:8000"
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
   
   celery-worker:
     restart: always

@@ -105,4 +105,3 @@ DJANGO_SETTINGS_MODULE=mysite.settings.local watchmedo auto-restart -d . -p '*.p
 DJANGO_SETTINGS_MODULE=mysite.settings.local python manage.py runserver
 
 
-

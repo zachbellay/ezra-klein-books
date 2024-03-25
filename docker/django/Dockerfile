@@ -48,7 +48,7 @@ RUN mkdir -p staticfiles && \
 RUN chmod +x /app/deployment/server-entrypoint.sh && \
     chmod +x /app/deployment/worker-entrypoint.sh
 
-USER 999
+# USER 999
 
 EXPOSE 8000
 CMD [ "/app/deployment/server-entrypoint.sh" ]
