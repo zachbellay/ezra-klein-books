@@ -25,6 +25,8 @@ services:
       - postgres
     ports:
       - "8000:8000"
+      - "8080:8080"
+      - "4444:4444"
     volumes:
       - .:/app
   

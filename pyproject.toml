@@ -41,7 +41,11 @@ notebook = "^7.0.7"
 
 
 [tool.poetry.group.worker.dependencies]
-whisper = "^1.1.10"
+langchain = "^0.1.13"
+openai-whisper = "^20231117"
+openai = "^1.14.3"
+chromadb = "^0.4.24"
+langchainhub = "^0.1.15"
 
 [build-system]
 requires = ["poetry-core"]
